@@ -26,11 +26,11 @@ export default class Poll extends React.Component {
     });
   }
 
-  answerPoll() {
+  answerPoll(choice) {
     this.setState({
       answeredPoll: true,
     });
-    this.props.socket.emit('poll', 'a');
+    this.props.socket.emit('poll answer', choice);
   }
 
   updateTally(newTally) {
@@ -57,7 +57,9 @@ export default class Poll extends React.Component {
             B: {this.state.tallyB}
           </div>
           <button
-            onClick={this.answerPoll}
+            onClick={() => {
+              this.answerPoll('a');
+            }}
             disabled={this.state.answeredPoll}
           >
             Answer Poll

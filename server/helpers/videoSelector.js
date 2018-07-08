@@ -15,6 +15,11 @@ const getRandomVideo = () => {
   return video;
 };
 
+const addVideo = (video) => {
+  videos.push(video);
+};
+
 module.exports = {
   getRandomVideo,
+  addVideo,
 };
