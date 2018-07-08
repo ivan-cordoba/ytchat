@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const key = 'AIzaSyAIiEWcJJzK1MPKCEtMk0YGwuaLn83oqpM';
+const key = process.env.KEY;
 const part = 'snippet';
 const q = '';
 

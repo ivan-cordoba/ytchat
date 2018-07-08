@@ -34,7 +34,7 @@ export default class Player extends React.Component {
   }
 
   renderVideo() {
-    if (this.state.done) {
+    if (this.state.done || this.props.videoID === '') {
       return (
         <div>
           Next Video Will Play Shortly
@@ -43,7 +43,7 @@ export default class Player extends React.Component {
     }
     return (
       <YouTube
-        videoId="2g811Eo7K8U"
+        videoId={this.props.videoID}
         opts={this.options}
         onPause={this.playVideo}
         onEnd={this.endVideo}
