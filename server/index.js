@@ -18,8 +18,10 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 io.on('connection', (socket) => {
   socket.on('msg', (msg) => {
-    io.emit('msg', xss(msg));
-    saveMessage(msg);
+    io.emit('msg', {
+      text: xss(msg.text),
+      username: msg.username,
+    });
   });
 });
 

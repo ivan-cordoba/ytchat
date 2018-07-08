@@ -8,13 +8,11 @@ const getVideos = () =>
   axios
     .get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${q}&key=${key}`);
 
+const getVideoInfo = () =>
+  axios
+    .get('');
 
 module.exports = {
   getVideos,
+  getVideoInfo,
 };
-
-getVideos()
-  .then((res) => {
-    console.log(JSON.stringify(res.data.items[0]));
-  })
-  .catch(err => console.error(err));
