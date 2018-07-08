@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 const key = process.env.KEY;
-const part = 'snippet';
 const q = '';
 
 const getVideos = () =>

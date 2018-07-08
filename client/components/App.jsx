@@ -20,13 +20,14 @@ export default class App extends React.Component {
   }
 
   updateVideo(newVideoID) {
+    console.log(newVideoID);
     this.setState({
       videoID: newVideoID,
     });
   }
 
   render() {
-    return(
+    return (
       <div>
         <Player videoID={this.state.videoID} />
         <Poll socket={this.socket} />

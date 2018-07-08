@@ -65,7 +65,7 @@ setInterval(() => {
   pollTallyA = 0;
   pollTallyB = 0;
   io.emit('tally', [pollTallyA, pollTallyB]);
-  io.emit('video', currentVideo);
+  io.emit('video', JSON.parse(JSON.stringify(currentVideo)).id.videoId);
   io.emit('poll', 'stuff');
-  console.log('video update sent');
+  console.log('video update sent', JSON.parse(JSON.stringify(currentVideo)).id.videoId);
 }, timeToNextVideo);

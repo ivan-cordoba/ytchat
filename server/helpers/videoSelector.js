@@ -1,9 +1,13 @@
-let videos = [
-  'IUN0lDk0CcA',
-  'sb5JfVi5bZY',
-  'h9yqifJ3AIQ',
-  'E6cPPmcfKao',
-];
+const { getVideos } = require('../../database/index');
+// const { getVideoInfo } = require('./youtube');
+// const Promise = require('bluebird');
+
+let videos;
+
+getVideos()
+  .then((res) => {
+    videos = res;
+  });
 
 const getRandomVideo = () => {
   if (videos.length === 0) {
