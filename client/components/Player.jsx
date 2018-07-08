@@ -1,5 +1,10 @@
 import React from 'react';
 import YouTube from 'react-youtube';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  width: 50vw;
+`;
 
 export default class Player extends React.Component {
   constructor(props) {
@@ -26,7 +31,7 @@ export default class Player extends React.Component {
   playVideo(event) {
     event.target.playVideo();
   }
-  
+
   endVideo() {
     this.setState({
       done: true,
@@ -36,9 +41,9 @@ export default class Player extends React.Component {
   renderVideo() {
     if (this.state.done || this.props.videoID === '') {
       return (
-        <div>
+        <Container>
           Next Video Will Play Shortly
-        </div>
+        </Container>
       );
     }
     return (

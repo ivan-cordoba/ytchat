@@ -1,6 +1,14 @@
 import React from 'react';
 import uuid from 'uuid/v4';
 import Message from './Message.jsx';
+import styled from 'styled-components';
+
+const Messages = styled.div`
+  width: 25vw;
+  height: 50vh;
+  overflow: scroll;
+  background-color: grey;
+`;
 
 export default class Chat extends React.Component {
   constructor(props) {
@@ -65,11 +73,11 @@ export default class Chat extends React.Component {
         >
           Submit
         </button>
-        <div>
+        <Messages>
           {
             this.state.messages.map(msg => <Message msg={msg} key={uuid()} />)
           }
-        </div>
+        </Messages>
       </div>
     );
   }

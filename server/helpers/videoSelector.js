@@ -15,7 +15,6 @@ const getRandomVideo = () => {
   }
   const index = Math.floor(Math.random() * videos.length);
   const video = videos[index];
-  videos.splice(index, 1);
   return video;
 };
 

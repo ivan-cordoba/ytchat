@@ -4,7 +4,7 @@ const path = require('path');
 const socket = require('socket.io');
 const http = require('http');
 const xss = require('xss');
-const { getRandomVideo, addVideo } = require('./helpers/videoSelector');
+const { getRandomVideo } = require('./helpers/videoSelector');
 
 const app = express();
 const httpServer = http.Server(app);
@@ -54,16 +54,17 @@ setInterval(() => {
   } else if (pollTallyB > pollTallyA) {
     console.log('picked b');
     currentVideo = videoB;
-    addVideo(videoA);
     videoB = getRandomVideo();
+    videoA = getRandomVideo();
   } else {
     console.log('picked a');
     currentVideo = videoA;
-    addVideo(videoB);
+    videoB = getRandomVideo();
     videoA = getRandomVideo();
   }
   pollTallyA = 0;
   pollTallyB = 0;
+  io.emit('poll choices', [videoA, videoB]);
   io.emit('tally', [pollTallyA, pollTallyB]);
   io.emit('video', JSON.parse(JSON.stringify(currentVideo)).id.videoId);
   io.emit('poll', 'stuff');
