@@ -1,0 +1,43 @@
+{
+  "name": "ytchat",
+  "version": "1.0.0",
+  "description": "live youtube viewer with chat",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://ivan-cordoba@github.com/ivan-cordoba/ytchat.git"
+  },
+  "author": "Ivan Cordoba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivan-cordoba/ytchat/issues"
+  },
+  "homepage": "https://github.com/ivan-cordoba/ytchat#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.3",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
+    "react-youtube": "^7.6.0",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1",
+    "styled-components": "^3.3.2",
+    "uuid": "^3.3.2",
+    "xss": "^1.0.3"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.4",
+    "babel-plugin-styled-components": "^1.5.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "morgan": "^1.9.0",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^2.1.5"
+  }
+}
