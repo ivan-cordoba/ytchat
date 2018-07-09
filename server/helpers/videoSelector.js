@@ -1,21 +1,29 @@
+const Promise = require('bluebird');
 const { getVideos } = require('../../database/index');
-// const { getVideoInfo } = require('./youtube');
-// const Promise = require('bluebird');
+const { getVideoLength } = require('./youtube');
 
 let videos;
 
-getVideos()
-  .then((res) => {
-    videos = res;
+const initializeVideos = () =>
+  new Promise((resolve, reject) => {
+    getVideos()
+      .then((res) => {
+        videos = res;
+        resolve();
+      });
   });
 
 const getRandomVideo = () => {
-  if (videos.length === 0) {
-    return '';
-  }
   const index = Math.floor(Math.random() * videos.length);
-  const video = videos[index];
-  return video;
+  const video = JSON.parse(JSON.stringify(videos[index]));
+
+  return new Promise((resolve, reject) => {
+    getVideoLength(video.id.videoId)
+      .then((res) => {
+        video.duration = res;
+        resolve(video);
+      });
+  });
 };
 
 const addVideo = (video) => {
@@ -25,4 +33,5 @@ const addVideo = (video) => {
 module.exports = {
   getRandomVideo,
   addVideo,
+  initializeVideos,
 };

@@ -4,7 +4,7 @@ import Message from './Message.jsx';
 import styled from 'styled-components';
 
 const Messages = styled.div`
-  width: 25vw;
+  flex-grow: 2;
   height: 50vh;
   overflow: scroll;
   background-color: grey;

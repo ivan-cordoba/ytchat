@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Player from './Player.jsx'
 import Chat from './Chat.jsx';
 import Poll from './Poll.jsx';
+import AudienceCounter from './AudienceCounter.jsx';
 
 const Container = styled.div`
   display: flex;
@@ -19,8 +20,10 @@ export default class App extends React.Component {
     this.socket = io();
     this.state = {
       videoID: '',
+      videoTime: null,
     };
     this.updateVideo = this.updateVideo.bind(this);
+    this.renderPlayer = this.renderPlayer.bind(this);
   }
 
   componentDidMount() {
@@ -28,21 +31,34 @@ export default class App extends React.Component {
   }
 
   updateVideo(newVideoID) {
-    console.log(newVideoID);
     this.setState({
-      videoID: newVideoID,
+      videoID: newVideoID[0],
+      videoTime: newVideoID[1],
     });
+  }
+
+  renderPlayer() {
+    if (this.state.videoTime !== null) {
+      return <Player videoID={this.state.videoID} videoTime={this.state.videoTime} />;
+    }
   }
 
   render() {
     return (
       <Container>
         <div>
-          <Player videoID={this.state.videoID} />
+          <AudienceCounter
+            socket={this.socket}
+          />
+          {this.renderPlayer()}
         </div>
         <div>
-          <Poll socket={this.socket} />
-          <Chat socket={this.socket} />
+          <Poll
+            socket={this.socket}
+          />
+          <Chat
+            socket={this.socket}
+          />
         </div>
       </Container>
     );
