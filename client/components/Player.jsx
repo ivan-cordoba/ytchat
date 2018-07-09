@@ -3,7 +3,7 @@ import YouTube from 'react-youtube';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width: 50vw;
+  width: 40vw;
 `;
 
 export default class Player extends React.Component {
