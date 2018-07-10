@@ -9,6 +9,15 @@ const videoSchema = new mongoose.Schema({}, { strict: false });
 
 const Video = mongoose.model('Video', videoSchema);
 
+const clearDB = () =>
+  Video.remove({}, () => {});
+
+const insertVideos = videos =>
+  Video.collection.insert(videos);
+
+const getCount = () =>
+  Video.count();
+
 const getVideos = () =>
   new Promise((resolve, reject) => {
     Video.find({}, (err, result) => {
@@ -22,4 +31,5 @@ const getVideos = () =>
 
 module.exports = {
   getVideos,
+  insertVideos,
 };

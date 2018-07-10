@@ -3,8 +3,8 @@ import YouTube from 'react-youtube';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  flex-grow: 3;
-  flex-basis: 25vw;
+  width: 100%;
+  min-width: 600px;
 `;
 
 export default class Player extends React.Component {
@@ -20,6 +20,7 @@ export default class Player extends React.Component {
         playsinline: 1,
         fs: 0,
         start: this.props.videoTime,
+        width: '100%',
       },
     };
     this.state = {
@@ -41,7 +42,6 @@ export default class Player extends React.Component {
   }
 
   renderVideo() {
-    console.log(this.props.videoTime);
     if (this.state.done || this.props.videoID === '') {
       return (
         <Container>
@@ -54,7 +54,6 @@ export default class Player extends React.Component {
         videoId={this.props.videoID}
         opts={this.options}
         onPause={this.playVideo}
-        onEnd={this.endVideo}
       />
     );
   }

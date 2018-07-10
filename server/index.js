@@ -28,9 +28,12 @@ app.use(express.static(path.join(__dirname, '../public')));
 io.on('connection', (socket) => {
   audienceCount += 1;
   io.emit('audience update', audienceCount);
-  socket.emit('poll', 'stuff');
-  socket.emit('poll choices', [videoANext, videoBNext]);
-  socket.emit('tally', [pollTallyA, pollTallyB]);
+  socket.emit('poll', {
+    choiceA: videoANext,
+    choiceB: videoBNext,
+    tallyA: pollTallyA,
+    tallyB: pollTallyB,
+  });
   socket.emit('video', [currentVideo.id.videoId, videoTimer]);
   socket.on('msg', (msg) => {
     io.emit('msg', {
@@ -41,7 +44,7 @@ io.on('connection', (socket) => {
   socket.on('poll answer', (answer) => {
     if (answer === 'a') {
       pollTallyA += 1;
-    } else if (answer === 'b') {
+    } else {
       pollTallyB += 1;
     }
     io.emit('tally', [pollTallyA, pollTallyB]);
@@ -73,7 +76,6 @@ const startTimer = () => {
 };
 
 const updateVideo = () => {
-  console.log('Sending new video...');
   if (pollTallyB > pollTallyA) {
     currentVideo = videoB;
   } else {
@@ -81,10 +83,13 @@ const updateVideo = () => {
   }
   pollTallyA = 0;
   pollTallyB = 0;
-  io.emit('poll choices', [videoANext, videoBNext]);
-  io.emit('tally', [pollTallyA, pollTallyB]);
   io.emit('video', [currentVideo.id.videoId, 0]);
-  io.emit('poll', 'stuff');
+  io.emit('poll', {
+    choiceA: videoANext,
+    choiceB: videoBNext,
+    tallyA: pollTallyA,
+    tallyB: pollTallyB,
+  });
   setTimeout(updateVideo, currentVideo.duration + 5000);
   clearInterval(videoTimerInterval);
   startTimer();

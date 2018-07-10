@@ -1,11 +1,28 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  padding: 10px;
+  font-size: 15px;
+`;
+
+const Username = styled.span`
+  font-weight: bold;
+`;
+
+const MessageText = styled.span`
+
+`;
 
 const Message = props => (
-  <div>
-    Message: {props.msg.text}
-    <br />
-    From: {props.msg.username}
-  </div>
+  <Container>
+    <Username>
+      {props.msg.username}:
+    </Username>
+    <MessageText>
+      {props.msg.text}
+    </MessageText>
+  </Container>
 );
 
 export default Message;

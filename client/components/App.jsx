@@ -2,7 +2,8 @@ import React from 'react';
 import io from 'socket.io-client';
 import styled from 'styled-components';
 
-import Player from './Player.jsx'
+import Header from './Header.jsx';
+import Player from './Player.jsx';
 import Chat from './Chat.jsx';
 import Poll from './Poll.jsx';
 import AudienceCounter from './AudienceCounter.jsx';
@@ -12,6 +13,17 @@ const Container = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  font-family: sans-serif;
+  padding: 20px;
+`;
+
+const VideoContainer = styled.div`
+
+`;
+
+const SideBar = styled.div`
+  margin-top: 50px;
+  width: 450px;
 `;
 
 export default class App extends React.Component {
@@ -46,20 +58,21 @@ export default class App extends React.Component {
   render() {
     return (
       <Container>
-        <div>
+        <Header />
+        <VideoContainer>
           <AudienceCounter
             socket={this.socket}
           />
           {this.renderPlayer()}
-        </div>
-        <div>
+        </VideoContainer>
+        <SideBar>
           <Poll
             socket={this.socket}
           />
           <Chat
             socket={this.socket}
           />
-        </div>
+        </SideBar>
       </Container>
     );
   }

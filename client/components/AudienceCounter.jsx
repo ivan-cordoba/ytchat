@@ -1,4 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  font-Size: 20px;
+  text-align: center;
+  background-color: red;
+  color: white;
+  margin: 50px 0 0 0;
+  padding: 10px 0 10px 0;
+  width: 100%
+`;
 
 export default class AudienceCounter extends React.Component {
   constructor(props) {
@@ -19,9 +30,9 @@ export default class AudienceCounter extends React.Component {
 
   render() {
     return (
-      <div>
-        Count {this.state.count}
-      </div>
+      <Container>
+        Viewers {this.state.count}
+      </Container>
     );
   }
 }

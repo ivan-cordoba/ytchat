@@ -1,8 +1,9 @@
 const axios = require('axios');
 const Promise = require('bluebird');
+const { insertVideos } = require('../../database/index');
 
 const key = process.env.KEY;
-const q = '';
+const q = 'dogs';
 
 const arrToNum = (arr) => {
   const strNum = arr.join('');
@@ -10,7 +11,7 @@ const arrToNum = (arr) => {
 };
 
 const convertTime = (isoTime) => {
-  //PT21M3S
+  //Input Format: PT21M3S
   const isoTimeArr = isoTime.toLowerCase().substring(2).split('');
   let timeSlice = [];
   let msTime = 0;
@@ -37,15 +38,20 @@ const convertTime = (isoTime) => {
 
 const getVideos = () =>
   axios
-    .get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${q}&key=${key}`);
+    .get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&order=viewCount&q=cat%7Ccats+-music&relevanceLanguage=en&safeSearch=strict&type=video&videoDuration=short&key=${key}`);
 
 const getVideoLength = videoId =>
   axios
     .get(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoId}&key=${key}`)
     .then(res =>
-      new Promise((resolve, reject) => {
-        return resolve(convertTime(res.data.items[0].contentDetails.duration));
-      }));
+      new Promise(resolve => resolve(convertTime(res.data.items[0].contentDetails.duration))));
+
+const addVideos = () => {
+  getVideos()
+    .then(res => insertVideos(res.data.items))
+    .then(res => console.log('Videos Saved'))
+    .catch(err => console.error(err.data));
+};
 
 module.exports = {
   getVideos,
