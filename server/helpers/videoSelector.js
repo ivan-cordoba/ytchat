@@ -9,6 +9,7 @@ const initializeVideos = () =>
     getVideos()
       .then((res) => {
         videos = res;
+        console.log('Videos', videos.length);
         resolve();
       });
   });

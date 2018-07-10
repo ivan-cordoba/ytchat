@@ -55,6 +55,7 @@ const Button = styled.div`
   margin: 10px 0 10px 0;
   :hover {
     box-shadow: 0 0 1px 1px grey;
+    cursor: pointer;
   }
 `;
 

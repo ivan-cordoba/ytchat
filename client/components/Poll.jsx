@@ -27,6 +27,7 @@ const Button = styled.div`
   margin: 10px 0 10px 0;
   :hover {
     box-shadow: 0 0 1px 1px grey;
+    cursor: pointer;
   }
 `;
 
@@ -54,7 +55,6 @@ export default class Poll extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showPoll: false,
       answeredPoll: false,
       tallyA: 0,
       tallyB: 0,
@@ -74,7 +74,6 @@ export default class Poll extends React.Component {
 
   startPoll(data) {
     this.setState({
-      showPoll: true,
       answeredPoll: false,
       tallyA: data.tallyA,
       tallyB: data.tallyB,
@@ -151,14 +150,7 @@ export default class Poll extends React.Component {
   render() {
     return (
       <div>
-        <div
-          hidden={this.state.showPoll}
-        >
-          Next Poll Will Start Soon
-        </div>
-        <div
-          hidden={!this.state.showPoll}
-        >
+        <div>
           {this.renderPreview()}
         </div>
       </div>

@@ -29,8 +29,8 @@ io.on('connection', (socket) => {
   audienceCount += 1;
   io.emit('audience update', audienceCount);
   socket.emit('poll', {
-    choiceA: videoANext,
-    choiceB: videoBNext,
+    choiceA: videoA,
+    choiceB: videoB,
     tallyA: pollTallyA,
     tallyB: pollTallyB,
   });
@@ -90,7 +90,7 @@ const updateVideo = () => {
     tallyA: pollTallyA,
     tallyB: pollTallyB,
   });
-  setTimeout(updateVideo, currentVideo.duration + 5000);
+  setTimeout(updateVideo, currentVideo.duration + 1000);
   clearInterval(videoTimerInterval);
   startTimer();
   console.log('Minutes to Next Video: ', currentVideo.duration / 60000);

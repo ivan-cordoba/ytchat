@@ -38,7 +38,7 @@ const convertTime = (isoTime) => {
 
 const getVideos = () =>
   axios
-    .get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&order=viewCount&q=cat%7Ccats+-music&relevanceLanguage=en&safeSearch=strict&type=video&videoDuration=short&key=${key}`);
+    .get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&order=viewCount&q=dog%7Cdogs+-music&relevanceLanguage=en&safeSearch=strict&type=video&videoDuration=short&key=${key}`);
 
 const getVideoLength = videoId =>
   axios

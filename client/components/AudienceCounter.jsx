@@ -8,7 +8,7 @@ const Container = styled.div`
   color: white;
   margin: 50px 0 0 0;
   padding: 10px 0 10px 0;
-  width: 100%
+  width: 100%;
 `;
 
 export default class AudienceCounter extends React.Component {
