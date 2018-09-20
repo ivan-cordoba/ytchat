@@ -88,7 +88,7 @@ export default class Chat extends React.Component {
   }
 
   addMessage(msg) {
-    const newMessages = this.state.messages;
+    const newMessages = [...this.state.messages];
     newMessages.unshift(msg);
     this.setState({
       messages: newMessages,

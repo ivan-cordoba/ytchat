@@ -21,7 +21,7 @@ const getRandomVideo = () => {
   return new Promise((resolve, reject) => {
     getVideoLength(video.id.videoId)
       .then((res) => {
-        video.duration = res;
+        video.duration = 9000;
         resolve(video);
       });
   });
