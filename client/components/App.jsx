@@ -43,6 +43,7 @@ export default class App extends React.Component {
   }
 
   updateVideo(newVideoID) {
+    console.log(newVideoID);
     this.setState({
       videoID: newVideoID[0],
       videoTime: newVideoID[1],
@@ -53,6 +54,7 @@ export default class App extends React.Component {
     if (this.state.videoTime !== null) {
       return <Player videoID={this.state.videoID} videoTime={this.state.videoTime} />;
     }
+    return null;
   }
 
   render() {

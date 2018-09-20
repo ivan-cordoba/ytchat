@@ -13,22 +13,39 @@ export default class Player extends React.Component {
     this.options = {
       playerVars: {
         autoplay: 1,
-        controls: 0,
+        controls: 1,
         disablekb: 1,
         modestbranding: 1,
         showinfo: 0,
         playsinline: 1,
         fs: 0,
-        start: this.props.videoTime,
+        start: 0,
         width: '100%',
       },
     };
     this.state = {
       done: false,
     };
+    this.player = null;
     this.playVideo = this.playVideo.bind(this);
     this.endVideo = this.endVideo.bind(this);
     this.renderVideo = this.renderVideo.bind(this);
+    this.assignPlayer = this.assignPlayer.bind(this);
+    this.syncTime = this.syncTime.bind(this);
+  }
+
+  componentDidUpdate() {
+    this.syncTime();
+  }
+
+  syncTime() {
+    const time = Math.floor(((new Date()) - (new Date(this.props.videoTime))) / 1000);
+    this.player.seekTo(time, true);
+  }
+
+  assignPlayer(event) {
+    this.player = event.target;
+    this.syncTime();
   }
 
   playVideo(event) {
@@ -54,6 +71,7 @@ export default class Player extends React.Component {
         videoId={this.props.videoID}
         opts={this.options}
         onPause={this.playVideo}
+        onReady={this.assignPlayer}
       />
     );
   }

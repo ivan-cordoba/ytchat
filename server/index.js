@@ -4,6 +4,7 @@ const path = require('path');
 const socket = require('socket.io');
 const http = require('http');
 const xss = require('xss');
+const timer = require('./helpers/timer');
 const { getRandomVideo, initializeVideos } = require('./helpers/videoSelector');
 
 const app = express();
@@ -18,9 +19,8 @@ let videoANext = null;
 let videoBNext = null;
 let pollTallyA = 0;
 let pollTallyB = 0;
-let videoTimer = 0;
+let videoTime = null;
 let audienceCount = 0;
-let videoTimerInterval;
 
 app.use(morgan('tiny'));
 app.use(express.static(path.join(__dirname, '../public')));
@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
     tallyA: pollTallyA,
     tallyB: pollTallyB,
   });
-  socket.emit('video', [currentVideo.id.videoId, videoTimer]);
+  socket.emit('video', [currentVideo.id.videoId, videoTime]);
   socket.on('msg', (msg) => {
     io.emit('msg', {
       text: xss(msg.text),
@@ -68,13 +68,6 @@ const queueUpVideos = () => {
     });
 };
 
-const startTimer = () => {
-  videoTimer = 0;
-  videoTimerInterval = setInterval(() => {
-    videoTimer += 1;
-  }, 1000);
-};
-
 const updateVideo = () => {
   if (pollTallyB > pollTallyA) {
     currentVideo = videoB;
@@ -83,17 +76,15 @@ const updateVideo = () => {
   }
   pollTallyA = 0;
   pollTallyB = 0;
-  io.emit('video', [currentVideo.id.videoId, 0]);
+  videoTime = new Date();
+  io.emit('video', [currentVideo.id.videoId, videoTime]);
+  timer(videoTime, currentVideo.duration + 1000, updateVideo);
   io.emit('poll', {
     choiceA: videoANext,
     choiceB: videoBNext,
     tallyA: pollTallyA,
     tallyB: pollTallyB,
   });
-  setTimeout(updateVideo, currentVideo.duration + 1000);
-  clearInterval(videoTimerInterval);
-  startTimer();
-  console.log('Minutes to Next Video: ', currentVideo.duration / 60000);
   queueUpVideos();
 };
 

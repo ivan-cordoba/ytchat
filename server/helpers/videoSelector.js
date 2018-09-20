@@ -9,7 +9,7 @@ const initializeVideos = () =>
     getVideos()
       .then((res) => {
         videos = res;
-        console.log('Videos', videos.length);
+        if (videos.length === 0) reject();
         resolve();
       });
   });
@@ -21,7 +21,7 @@ const getRandomVideo = () => {
   return new Promise((resolve, reject) => {
     getVideoLength(video.id.videoId)
       .then((res) => {
-        video.duration = 9000;
+        video.duration = res;
         resolve(video);
       });
   });
