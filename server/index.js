@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
     tallyA: pollTallyA,
     tallyB: pollTallyB,
   });
-  socket.emit('video', [currentVideo.id.videoId, videoTime]);
+  socket.emit('video', [currentVideo.snippet.resourceId.videoId, videoTime]);
   socket.on('msg', (msg) => {
     io.emit('msg', {
       text: xss(msg.text),
