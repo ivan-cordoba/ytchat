@@ -12,7 +12,7 @@ export default class Player extends React.Component {
     super(props);
     this.options = {
       playerVars: {
-        autoplay: 0,
+        autoplay: 1,
         controls: 1,
         disablekb: 1,
         modestbranding: 1,
