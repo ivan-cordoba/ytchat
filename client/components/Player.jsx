@@ -12,7 +12,7 @@ export default class Player extends React.Component {
     super(props);
     this.options = {
       playerVars: {
-        autoplay: 1,
+        autoplay: 0,
         controls: 1,
         disablekb: 1,
         modestbranding: 1,
@@ -41,6 +41,7 @@ export default class Player extends React.Component {
   syncTime() {
     const time = Math.floor(((new Date()) - (new Date(this.props.videoTime))) / 1000);
     this.player.seekTo(time, true);
+    this.player.playVideo();
   }
 
   assignPlayer(event) {
